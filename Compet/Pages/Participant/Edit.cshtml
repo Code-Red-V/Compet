@@ -1,0 +1,41 @@
+﻿@page
+@model Compet.Pages.Participant.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Изменение информации участника</h1>
+
+<h4>Participant</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Participant.Id" />
+            <div class="form-group">
+                <label asp-for="Participant.Name" class="control-label"></label>
+                <input asp-for="Participant.Name" class="form-control" />
+                <span asp-validation-for="Participant.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Participant.CategoryId" class="control-label"></label>
+                <select asp-for="Participant.CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
+                <span asp-validation-for="Participant.CategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index" class="btn btn-primary">Вернутся назад</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

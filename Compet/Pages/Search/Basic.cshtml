@@ -1,0 +1,81 @@
+﻿@page
+@model Compet.Pages.Search.BasicModel
+@{
+}
+<h1 class="display-4">Поиск</h1>
+<hr />
+<form>
+    Искать по: <select asp-for="value">
+        <option value="Participant">Участникам</option>
+        <option value="Event">Соревнование по дисциплине</option>
+    </select>
+    <br />
+    <br />
+
+    Ввод: <input type="text" asp-for="searchString" placeholder="Search" />
+    <br />
+    <br />
+    <input class="btn btn-primary" type="submit" value="Search" />
+
+</form>
+
+@if (Model.value == "Participant")
+{
+    if (Model.Participants != null)
+    {
+        <h3 class="display-4">Участники</h3>
+        <hr />
+        <table class="table table-dark table-hover">
+            <tr>
+                <th>Фамилия Имя</th>
+                <th>Разряд</th>
+            </tr>
+
+            @foreach (var item in Model.Participants)
+            {
+                <tr>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @item.Category.Name
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+    else if (Model.Participants == null)
+    {
+        <h1 class="display-4">Результатов не найдено :(</h1>
+    }
+}
+else if (Model.value == "Event")
+{
+    if (Model.Events != null)
+    {
+        <h3 class="display-4">Соревнования</h3>
+        <hr />
+        <table class="table table-dark table-hover">
+            <tr>
+                <th>Дата проведения соревнования</th>
+                <th>Дисциплина</th>
+            </tr>
+
+            @foreach (var item in Model.Events)
+            {
+                <tr>
+                    <td>
+                        @item.EventDate
+                    </td>
+                    <td>
+                        @item.Discipline.Name
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+    else if (Model.Events == null)
+    {
+        <h1 class="display-4">Результатов не найдено :(</h1>
+    }
+}
